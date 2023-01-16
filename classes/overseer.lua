@@ -12,7 +12,6 @@ local overseer = {
     playerObj = nil,
     enemyObj = nil,
     statsObj = nil,
-    game_timerObj = nil,
     footerObj = nil,
     spellBtnObjs = {} -- empty list
 }
@@ -40,8 +39,6 @@ function overseer:new()
     )
 
     obj.footerObj = footer:new()
-
-    obj.game_timerObj = timer:new( 0, true )
 
     obj:init_spellBtns()
 
