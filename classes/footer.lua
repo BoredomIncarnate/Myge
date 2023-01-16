@@ -26,20 +26,17 @@ function footer:update( dt )
 end
 
 function footer:display()
+    love.graphics.setNewFont( "assets/retrofont/retrofont.ttf", 16)
     love.graphics.print(
         "Current runtime: "..self.runtime:seconds(),
         250,
-        580,
-        0,
-        1.2
+        580
     )
 
     love.graphics.print(
         self.lastAction,
         250,
-        600,
-        0,
-        1.2
+        600
     )
 
 end

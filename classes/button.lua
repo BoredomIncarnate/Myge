@@ -33,13 +33,13 @@ function button:display()
         self.img:getHeight()
     )
 
+
+    love.graphics.setNewFont( "assets/retrofont/retrofont.ttf", 22)
     -- TODO: change how we adjust from center for text length
     love.graphics.print(
         self.text,
         cent_x - 30,
-        cent_y - 10,
-        0, -- num to scale along x axis
-        1.5 -- num scale along y axis
+        cent_y - 10
     )
 
 end

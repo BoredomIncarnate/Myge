@@ -10,6 +10,7 @@ local overseerObj = nil
 -- load
 function love.load( arg )
     -- init overseer
+    love.graphics.setNewFont( "assets/retrofont/retrofont.ttf", 16)
     overseerObj = overseer:new()
 
 end
