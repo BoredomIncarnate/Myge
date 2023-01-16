@@ -5,6 +5,7 @@ mage = require( "classes/mage" )
 statsboard = require( "classes/statsboard" )
 timer = require( "classes/timer" )
 button = require( "classes/button" )
+footer = require( "classes/footer" )
 
 -- struct
 local overseer = {
@@ -12,6 +13,7 @@ local overseer = {
     enemyObj = nil,
     statsObj = nil,
     game_timerObj = nil,
+    footerObj = nil,
     spellBtnObjs = {} -- empty list
 }
 
@@ -27,9 +29,17 @@ function overseer:new()
         {}
     )
 
+    obj.enemyObj = mage:new(
+        love.graphics.newImage( 'assets/enemy_placeholder.png'),
+        "Enemy",
+        {}
+    )
+
     obj.statsObj = statsboard:new(
         love.graphics.newImage( 'assets/stats_placeholder.png' )
     )
+
+    obj.footerObj = footer:new()
 
     obj.game_timerObj = timer:new( 0, true )
 
@@ -41,8 +51,8 @@ end
 
 -- abstrasted call for logic related to love.update( dt )
 function overseer:update( dt )
-    if ( self.game_timerObj ~= 0 ) then
-        self.game_timerObj:update( dt )
+    if ( self.footerObj ~= 0 ) then
+        self.footerObj:update( dt )
     end
 
 end
@@ -57,18 +67,18 @@ function overseer:display()
         self.playerObj:display( 0, 320 )
     end
 
-    if self.game_timerObj ~= 0 then
-        love.graphics.print(
-            "Run time: "..self.game_timerObj:seconds(),
-            300,
-            300
-        )
+    if self.enemyObj ~= 0 then
+        self.enemyObj:display( 240, 0 )
     end
 
     if self.spellBtnObjs ~= 0 then
         for i, btn in ipairs ( self.spellBtnObjs ) do
-            btn:draw()
+            btn:display()
         end
+    end
+
+    if self.footerObj ~= 0 then
+        self.footerObj:display()
     end
 
 end
@@ -109,6 +119,23 @@ function overseer:init_spellBtns()
         start_x = start_x * 2
     end
 
+end
+
+function overseer:scanClick( x, y )
+    for i, btn in pairs( self.spellBtnObjs ) do
+        if  x >= btn.x 
+        and y >= btn.y
+        and x < btn.x + btn.img:getWidth()
+        and y < btn.y + btn.img:getHeight() then
+            btn:func()
+            self.footerObj.lastAction = btn.text.." was clicked"
+        end
+    end
+
+end
+
+function overseer:setLastAction( str )
+    self.footerObj.lastAction = str
 end
 
 return overseer

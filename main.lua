@@ -30,4 +30,13 @@ function love.draw( dt )
     
 end
 
+function love.mousepressed( x, y, btn )
+    if btn == 1 then -- if left mouse btn is clicked
+        if ( overseerObj ~= 0 ) then
+            overseerObj:scanClick( x, y )
+        end
+    end
+
+end
+
 
