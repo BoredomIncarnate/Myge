@@ -1,42 +1,31 @@
 -- footer.lua
-
-timer = require( "classes/timer" )
-strings = require( "static/strings" )
+utils = require( "utils/utils" )
 
 local footer = {
-    runtime = nil, -- game runtime timer
-    lastAction = nil -- last action recorded by the system
+    text = nil
 }
 
 function footer:new() 
     local obj = {}
 
     setmetatable( obj, { __index = self } )
-
-    obj.runtime = timer:new( 0, true )
-    obj.lastAction = strings.gameInit
+    obj.text = strings.gameInit
 
     return obj
 
 end
 
-function footer:update( dt )
-    self.runtime:update( dt )
+function footer:update( str )
+   self.text = str
 
 end
 
 function footer:display()
-    love.graphics.setNewFont( "assets/retrofont/retrofont.ttf", 16)
+    utils:setFontSize(14)
     love.graphics.print(
-        "Current runtime: "..self.runtime:seconds(),
+        self.text,
         250,
         580
-    )
-
-    love.graphics.print(
-        self.lastAction,
-        250,
-        600
     )
 
 end

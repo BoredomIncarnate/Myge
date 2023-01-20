@@ -7,7 +7,7 @@ local button = {
     func = nil
 }
 
-function button:new( img, text, x, y, func )
+function button:new( img, text, info, x, y, func )
     local obj = {}
 
     setmetatable( obj, { __index = self } )
@@ -18,6 +18,7 @@ function button:new( img, text, x, y, func )
     obj.func = func or function() 
         print( obj.text.." has been clicked." )
     end
+    obj.info = info or "info"
 
     return obj;
 
@@ -34,11 +35,11 @@ function button:display()
     )
 
 
-    love.graphics.setNewFont( "assets/retrofont/retrofont.ttf", 22)
+    utils:setFontSize( 22 )
     -- TODO: change how we adjust from center for text length
     love.graphics.print(
         self.text,
-        cent_x - 30,
+        cent_x - 70,
         cent_y - 10
     )
 

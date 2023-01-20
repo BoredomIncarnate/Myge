@@ -5,11 +5,15 @@
 local mage = {
     img = nil,
     name = nil,
-    spells = {} -- empty list
+    spells = {}, -- empty list
+    health = {
+        max = nil,
+        current = nil
+    }
 }
 
 -- constructor
-function mage:new( img, name, spells )
+function mage:new( img, name, spells, maxHealth)
     local obj = {}
 
     setmetatable( obj, { __index = self } )
@@ -17,6 +21,10 @@ function mage:new( img, name, spells )
     obj.img = img or nil
     obj.name = name or "Mage"
     obj.spells = spells or {}
+    obj.health = {
+        max = maxHealth,
+        current = maxHealth
+    }
 
     return obj
 end

@@ -40,4 +40,11 @@ function love.mousepressed( x, y, btn )
 
 end
 
+function love.mousemoved( x, y, dx, dy )
+    if ( overseerObj ~= 0 ) then
+        overseerObj:scanHover( x, y )
+    end
+
+end
+
 

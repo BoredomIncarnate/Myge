@@ -9,4 +9,12 @@ function utils:getCenter( xpos, ypos, w, h )
     return x, y
 end
 
+function utils:setFontSize( size )
+    if size ~= 0
+    and size ~= nil then
+        love.graphics.setNewFont( "assets/retrofont/retrofont.ttf", size)
+    end
+    
+end
+
 return utils
