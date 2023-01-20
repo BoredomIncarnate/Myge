@@ -1,13 +1,18 @@
 --button.lua
 utils = require( 'utils/utils' )
+action = require( 'classes/action' )
 
 local button = {
     img = nil,
-    text = nil,
+    text = "",
+    info = "",
+    x = 0,
+    y = 0,
+    action = {},
     func = nil
 }
 
-function button:new( img, text, info, x, y, func )
+function button:new( img, text, x, y, act, func )
     local obj = {}
 
     setmetatable( obj, { __index = self } )
@@ -15,13 +20,22 @@ function button:new( img, text, info, x, y, func )
     obj.text = text or "button"
     obj.x = x or 0
     obj.y = y or 0
+    obj.action = act or action:new(
+        obj.text,
+        3, 
+        "fire",
+        1
+    )
     obj.func = func or function() 
         print( obj.text.." has been clicked." )
     end
-    obj.info = info or "info"
 
     return obj;
 
+end
+
+function button:info() 
+    return "DMG: "..self.action.dmg.."    MOD: "..self.action.mod.."\n\nTYP: "..self.action.typ
 end
 
 function button:display()

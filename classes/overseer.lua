@@ -123,7 +123,6 @@ function overseer:init_spellBtns()
             button:new( 
                 love.graphics.newImage( 'assets/button.png' ),
                 "Spell "..i,
-                "This is Spell "..i.."; it is rubbish.",
                 start_x,
                 start_y
             )
@@ -139,7 +138,6 @@ function overseer:init_spellBtns()
             button:new( 
                 love.graphics.newImage( 'assets/button.png' ),
                 "Spell "..i,
-                "This is Spell "..i.."; it is rubbish.",
                 start_x,
                 start_y
             )
@@ -168,7 +166,7 @@ function overseer:scanHover( x, y )
         and y >= btn.y
         and x < btn.x + btn.img:getWidth()
         and y < btn.y + btn.img:getHeight() then
-            self.footerObj:update( btn.info )
+            self.footerObj:update( btn:info() )
         end
     end
 
