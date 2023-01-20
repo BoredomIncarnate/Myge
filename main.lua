@@ -46,5 +46,3 @@ function love.mousemoved( x, y, dx, dy )
     end
 
 end
-
-

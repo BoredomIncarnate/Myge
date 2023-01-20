@@ -25,5 +25,4 @@ function timer:seconds()
     return math.floor( math.abs( self.ms ) )
 end
 
-
 return timer
