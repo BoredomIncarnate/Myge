@@ -7,6 +7,7 @@ timer = require( "classes/timer" )
 button = require( "classes/button" )
 footer = require( "classes/footer" )
 metricsboard = require( "classes/metricsboard" )
+actiongenerator = require ( "classes/actiongenerator" )
 
 -- struct
 local overseer = {
@@ -16,6 +17,7 @@ local overseer = {
     footerObj = nil,
     playerMetricsObj = nil,
     enemyMetricsObj = nil,
+    actiongenerator = nil,
     spellBtnObjs = {} -- empty list
 }
 
@@ -55,6 +57,8 @@ function overseer:new()
     )
 
     obj.footerObj = footer:new()
+
+    obj.actiongenerator = actiongenerator:new()
 
     obj:init_spellBtns()
 
@@ -118,13 +122,15 @@ function overseer:init_spellBtns()
     local start_y = 320
 
     for i=1, 2 do
+        local newAct = self.actiongenerator:generate( "FIRE", 3 )
         table.insert(
             self.spellBtnObjs, 
             button:new( 
                 love.graphics.newImage( 'assets/button.png' ),
-                "Spell "..i,
+                newAct.name,
                 start_x,
-                start_y
+                start_y,
+                newAct
             )
         )
         start_x = start_x * 2
@@ -133,13 +139,15 @@ function overseer:init_spellBtns()
     start_x = 240
     start_y = start_y + 120
     for i=3, 4 do
+        local newAct = self.actiongenerator:generate( "DARK", 3 )
         table.insert(
             self.spellBtnObjs, 
             button:new( 
                 love.graphics.newImage( 'assets/button.png' ),
-                "Spell "..i,
+                newAct.name,
                 start_x,
-                start_y
+                start_y,
+                newAct
             )
         )
         start_x = start_x * 2

@@ -33,4 +33,9 @@ function action:basedmg( caster_magic_type )
 
 end
 
+function action:info()
+    return "DMG: "..self.dmg.."\tMOD: "..self.mod.."\n\nTYP: "..self.typ
+
+end
+
 return action

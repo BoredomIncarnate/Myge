@@ -35,7 +35,7 @@ function button:new( img, text, x, y, act, func )
 end
 
 function button:info() 
-    return "DMG: "..self.action.dmg.."    MOD: "..self.action.mod.."\n\nTYP: "..self.action.typ
+    return self.action:info()
 end
 
 function button:display()
