@@ -1,6 +1,8 @@
 -- Mage.lua
 -- the structure and functionality of a mage
 
+typ = require( "classes/typ" )
+
 -- struct
 local mage = {
     img = nil,
@@ -9,11 +11,12 @@ local mage = {
     health = {
         max = nil,
         current = nil
-    }
+    },
+    typ = nil
 }
 
 -- constructor
-function mage:new( img, name, spells, maxHealth)
+function mage:new( img, name, spells, maxHealth, mtyp )
     local obj = {}
 
     setmetatable( obj, { __index = self } )
@@ -25,13 +28,9 @@ function mage:new( img, name, spells, maxHealth)
         max = maxHealth,
         current = maxHealth
     }
-
+    obj.typ = mtyp or typ.FIRE
+    print( obj.typ )
     return obj
-end
-
--- cast the spell of the given spells-list-index
-function mage:cast( spellIndex )
-
 end
 
 -- draw the mage's avatar

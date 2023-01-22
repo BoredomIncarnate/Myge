@@ -17,4 +17,10 @@ function utils:setFontSize( size )
     
 end
 
+function utils:resetRandom()
+    math.randomseed(os.time())
+    math.random()
+
+end
+
 return utils

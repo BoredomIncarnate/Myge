@@ -10,6 +10,8 @@ local action = {
 function action:new( name, damage, magic_type, modifier ) 
     local obj = {}
 
+    print( magic_type )
+
     setmetatable( obj, { __index = self } )
     obj.name = name
     obj.dmg = damage
@@ -20,16 +22,8 @@ function action:new( name, damage, magic_type, modifier )
 
 end
 
-function action:basedmg( caster_magic_type )
-    local dmg = self.dmg
-
-    if ( caster_magic_type == self.typ ) then
-        dmg = dmg * mod
-    else
-        dmg = dmg * ( mod / 2 )
-    end
-
-    return dmg
+function action:basedmg()
+    return self.dmg + ( self.dmg * self.mod ) / 2
 
 end
 

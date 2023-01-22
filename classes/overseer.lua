@@ -8,6 +8,9 @@ button = require( "classes/button" )
 footer = require( "classes/footer" )
 metricsboard = require( "classes/metricsboard" )
 actiongenerator = require ( "classes/actiongenerator" )
+utils = require( "utils/utils" )
+typ = require( "classes/typ" )
+typgenerator = require( "classes/typgenerator" )
 
 -- struct
 local overseer = {
@@ -23,6 +26,9 @@ local overseer = {
 
 -- constructor
 function overseer:new()
+
+    utils:resetRandom()
+
     local obj = {}
 
     setmetatable( obj, { __index = self } )
@@ -122,7 +128,10 @@ function overseer:init_spellBtns()
     local start_y = 320
 
     for i=1, 2 do
-        local newAct = self.actiongenerator:generate( "FIRE", 3 )
+        local newAct = self.actiongenerator:generate( 
+            typgenerator:generate(), 
+            3 
+        )
         table.insert(
             self.spellBtnObjs, 
             button:new( 
@@ -139,7 +148,10 @@ function overseer:init_spellBtns()
     start_x = 240
     start_y = start_y + 120
     for i=3, 4 do
-        local newAct = self.actiongenerator:generate( "DARK", 3 )
+        local newAct = self.actiongenerator:generate( 
+            typgenerator:generate(), 
+            3 
+        )
         table.insert(
             self.spellBtnObjs, 
             button:new( 
